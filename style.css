@@ -1,6 +1,7 @@
 body {
     background: black;
     color: #fff;
+    font-size: 0.7rem;
 }
 
 
@@ -51,13 +52,17 @@ body {
 
 
 
+
 @media screen and (min-width: 500px) {
    .results {
     display:flex;
     flex-direction: row;
    }
-    }
 
-    .posters:hover{
-        transform: scale(1.1);
-    }
+   .posters:hover{
+    transform: scale(1.1);
+}
+
+ }
+
+ 
