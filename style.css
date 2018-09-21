@@ -13,6 +13,12 @@ body {
     display:flex;
     justify-content:center;
 }
+
+#heading__after{
+    display:flex;
+    justify-content: center;
+}
+
 .results {
     display:flex;
     flex-direction: column;
