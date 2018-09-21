@@ -31,13 +31,6 @@ function append(parent, element) {
     return parent.appendChild(element)
 }
 
-//menu toggle
-// var open_menu = document.querySelector("#main-menu");
-// var burger_menu = document.querySelector("#burger_menu");
-// burger_menu.addEventListener("click", function () {
-//     burger_menu.classList.toggle("active-burger");
-//     open_menu.classList.toggle("show-menu-mobile");
-// });
 
 function searchTitle(title) {
     fetch(`http://www.omdbapi.com/?s=${title}&apikey=${apiKey}`)
@@ -51,32 +44,31 @@ function searchTitle(title) {
 //search title passes into this function
 function displayResults(films) {
     let myString = ""
-    films.forEach(film => {
+    films.map(film => {
         myString +=
-            `<h1>${film.Title} ${(film.Year)}</h1>
-            <img class="posters" src=${film.Poster}>`
+            `<div data-imdbid=${film.imdbID}><h1> ${film.Title}(${film.Year})</h1>
+            <img class="posters" src=${film.Poster}></div>`
     })
     resultsPosterPosition.innerHTML = myString;
-
-    //has to be done while image loads otherwise it wont see images
-    const filmPosters = document.querySelectorAll(".posters")
-    filmPosters.forEach(filmPoster => {
-        filmPoster.addEventListener("click", function (event) {
-                console.log({event})
-            })
-        })
     }
 
+    resultsPosterPosition.addEventListener("click", function(event){
+        const filmID = event.path[1].attributes["data-imdbid"].nodeValue
+        getMovieInfo(filmID);
+    })
+    
 
-
-
-
-function getMovieInfo(body){
-    const imdbId = body.Search.imbdID
-    const url = `http://www.omdbapi.com/?i=tt${imbdId}&apikey=${apiKey}`
+function getMovieInfo(filmID){
+    const url = `http://www.omdbapi.com/?i=${filmID}&apikey=${apiKey}`
     fetch(url)
     .then(response => response.json())
     .then(body =>{
-
+        console.log(body)
     })
 }
+
+
+
+
+
+// document.querySelector("[data-imdbid=tt7428594]")
