@@ -4,6 +4,7 @@ const apiKey = "8d5ab09"
 //selectors
 const form = document.querySelector("form");
 const resultsPosterPosition = document.querySelector(".results");
+const resultsInfoPosition = document.querySelector(".results-info")
 const headingTitle = document.querySelector("#welcome-heading")
 const headingAfterSearch = document.querySelector("#heading__after")
 const textInputField = document.querySelector("#search_input")
@@ -64,6 +65,12 @@ function getMovieInfo(filmID){
     .then(response => response.json())
     .then(body =>{
         console.log(body)
+        let movieInfo = `<div>
+                            <h3>Movie Information:</h3>
+                            <p>Plot: ${body.Plot}</p>
+                        </div>`
+        resultsInfoPosition.innerHTML = movieInfo;
+        
     })
 }
 
