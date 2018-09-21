@@ -8,6 +8,7 @@ const resultsInfoPosition = document.querySelector(".results-info")
 const headingTitle = document.querySelector("#welcome-heading")
 const headingAfterSearch = document.querySelector("#heading__after")
 const textInputField = document.querySelector("#search_input")
+const scrollHeading = document.querySelector(".scroll-header");
 
 
 //Event Listeners
@@ -19,7 +20,7 @@ form.addEventListener("submit", function (e) {
     textInputField.value = "Search For Another Movie..";
     headingTitle.textContent = "";
     headingAfterSearch.textContent = `All ${titleResults} Films & Related Films`
-
+    scrollHeading.textContent = `Scroll Through Our Selction of ${titleResults} Films`
 })
 
 //function for creating a element
@@ -47,17 +48,20 @@ function displayResults(films) {
     let myString = ""
     films.map(film => {
         myString +=
-            `<div data-imdbid=${film.imdbID}><h1> ${film.Title}(${film.Year})</h1>
+            `<div data-imdbid=${film.imdbID}><h1 class="movie-title"> ${film.Title}(${film.Year})</h1>
             <img class="posters" src=${film.Poster}></div>`
     })
     resultsPosterPosition.innerHTML = myString;
     }
 
-    resultsPosterPosition.addEventListener("click", function(event){
+    resultsPosterPosition.addEventListener("mouseover", function(event){
         const filmID = event.path[1].attributes["data-imdbid"].nodeValue
         getMovieInfo(filmID);
     })
-    
+
+    resultsPosterPosition.addEventListener("mouseout",function(event){
+        resultsInfoPosition.textContent ="";
+    })
 
 function getMovieInfo(filmID){
     const url = `http://www.omdbapi.com/?i=${filmID}&apikey=${apiKey}`
@@ -67,10 +71,13 @@ function getMovieInfo(filmID){
         console.log(body)
         let movieInfo = `<div>
                             <h3>Movie Information:</h3>
+                            <p>Rating: ${body.imdbRating}</p>
                             <p>Plot: ${body.Plot}</p>
+                            <p>Directed By: ${body.Director}</p>
+                            <p>Genre: ${body.Genre}</p>
+                            <p>Runtime: ${body.Runtime}</p>
                         </div>`
         resultsInfoPosition.innerHTML = movieInfo;
-        
     })
 }
 
