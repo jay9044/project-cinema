@@ -6,6 +6,7 @@ const form = document.querySelector("form");
 const resultsPosterPosition = document.querySelector(".results"); 
 const headingTitle = document.querySelector("#welcome-heading")
 const headingAfterSearch = document.querySelector("#heading__after")
+const textInputField = document.querySelector("#search_input")
 
 //Event Listeners
 form.addEventListener("submit", function(e){
@@ -13,6 +14,7 @@ form.addEventListener("submit", function(e){
     console.log({event})
     titleResults = event.target[0].value
     searchTitle(titleResults);
+    textInputField.value = "Search For Another Movie..";
     headingTitle.textContent = "";
     headingAfterSearch.textContent = `All ${titleResults} Films & Related Films`
 

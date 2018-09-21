@@ -19,6 +19,9 @@ body {
     justify-content: center;
 }
 
+#search_input{
+    width: 50%;
+}
 .results {
     display:flex;
     flex-direction: column;
