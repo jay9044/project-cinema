@@ -9,6 +9,7 @@ const headingTitle = document.querySelector("#welcome-heading")
 const headingAfterSearch = document.querySelector("#heading__after")
 const textInputField = document.querySelector("#search_input")
 const scrollHeading = document.querySelector(".scroll-header");
+const gridContainer = document.querySelector(".grid-container")
 
 
 //Event Listeners
@@ -19,8 +20,11 @@ form.addEventListener("submit", function (e) {
     searchTitle(titleResults);
     textInputField.value = "Search For Another Movie..";
     headingTitle.textContent = "";
-    headingAfterSearch.textContent = `All ${titleResults} Films & Related Films`
-    scrollHeading.textContent = `Scroll Through Our Selction of ${titleResults} Films`
+    headingAfterSearch.style.textTransform = "capitalize";
+    headingAfterSearch.textContent = `All '${titleResults}' Films`
+    scrollHeading.style.textTransform ="capitalize";
+    scrollHeading.textContent = `Scroll Through Our Selection of ${titleResults} Films`
+    gridContainer.style.marginTop = 0;
 })
 
 //function for creating a element
@@ -63,6 +67,7 @@ function displayResults(films) {
         resultsInfoPosition.textContent ="";
     })
 
+//this function is passed into the event listener
 function getMovieInfo(filmID){
     const url = `http://www.omdbapi.com/?i=${filmID}&apikey=${apiKey}`
     fetch(url)
@@ -85,4 +90,15 @@ function getMovieInfo(filmID){
 
 
 
-// document.querySelector("[data-imdbid=tt7428594]")
+
+
+
+
+
+//menu toggle
+var open_menu = document.querySelector("#main-menu");
+var burger_menu = document.querySelector("#burger_menu");
+burger_menu.addEventListener("click", function () {
+    burger_menu.classList.toggle("active-burger");
+    open_menu.classList.toggle("show-menu-mobile");
+});
