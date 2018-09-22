@@ -1,3 +1,5 @@
+alert( window.innerWidth );
+
 //ApiKeys
 const apiKey = "8d5ab09"
 
@@ -57,12 +59,18 @@ function displayResults(films) {
     })
     resultsPosterPosition.innerHTML = myString;
     }
-
+    //this find the data set id given to each film
     resultsPosterPosition.addEventListener("mouseover", function(event){
         const filmID = event.path[1].attributes["data-imdbid"].nodeValue
+        //if mobile size remove mouseover
+        if(window.innerWidth < 500){
+            remove.resultsPosterPosition.addEventListener("mouseover", function(event){
+                getMovieInfo(filmID)
+            })
+        }
         getMovieInfo(filmID);
     })
-
+    //clear movie info when mouse leaves poster
     resultsPosterPosition.addEventListener("mouseout",function(event){
         resultsInfoPosition.textContent ="";
     })
@@ -76,8 +84,8 @@ function getMovieInfo(filmID){
         console.log(body)
         let movieInfo = `<div>
                             <h3>Movie Information:</h3>
-                            <p>Rating: ${body.imdbRating}</p>
                             <p>Plot: ${body.Plot}</p>
+                            <p>Rating: ${body.imdbRating}</p>
                             <p>Directed By: ${body.Director}</p>
                             <p>Genre: ${body.Genre}</p>
                             <p>Runtime: ${body.Runtime}</p>
@@ -95,6 +103,7 @@ function getMovieInfo(filmID){
 
 
 
+
 //menu toggle
 var open_menu = document.querySelector("#main-menu");
 var burger_menu = document.querySelector("#burger_menu");
@@ -102,3 +111,5 @@ burger_menu.addEventListener("click", function () {
     burger_menu.classList.toggle("active-burger");
     open_menu.classList.toggle("show-menu-mobile");
 });
+
+
